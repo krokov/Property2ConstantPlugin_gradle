@@ -1,0 +1,25 @@
+plugins {
+    id 'java-gradle-plugin'
+}
+
+group = 'com.krok'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation 'com.krok:Property2ConstantPlugin:1.0'
+}
+
+gradlePlugin {
+    plugins {
+        Property2ConstantPlugin {
+            id = 'com.krok.Property2ConstantPlugin'
+            implementationClass = 'com.krok.Property2ConstantPlugin'
+        }
+    }
+}
+
