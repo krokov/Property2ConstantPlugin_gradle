@@ -4,7 +4,7 @@ plugins {
     id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
-group = 'com.krokodon'
+group = 'com.krok'
 version = '0.1'
 
 //repositories {
@@ -16,13 +16,13 @@ dependencies {
 }
 gradlePlugin {
     website = 'https://github.com/krokov'
-    vcsUrl = 'https://github.com/krokov/Property2ConstantPlugin_gradle'
+    vcsUrl = 'https://github.com/krokov/Property2ConstantPlugin'
     plugins {
         Property2Constant {
-            id = 'com.krokodon.gradle.property2constant'
-            implementationClass = 'com.krokodon.gradle.property2constant.Property2ConstantPlugin'
+            id = 'com.krok.property2constant'
+            implementationClass = 'com.krok.plugins.property2constant.Property2ConstantPlugin'
             displayName = 'Property2Constant'
-            description = 'Turns .properties files into constant.java files'
+            description = 'Turns .properties files into contant.java files'
             tags.set(['properties', 'constants'])
         }
     }
