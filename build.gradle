@@ -5,21 +5,25 @@ plugins {
 }
 
 group = 'com.krok'
-version = '1.0'
+version = '0.1'
 
-repositories {
-    mavenCentral()
-}
+//repositories {
+//    mavenCentral()
+//}
 
 dependencies {
     implementation gradleApi()
 }
 gradlePlugin {
-    website = ''
+    website = 'https://github.com/krokov'
+    vcsUrl = 'https://github.com/krokov/Property2ConstantPlugin'
     plugins {
         Property2Constant {
             id = 'com.krok.property2constant'
             implementationClass = 'com.krok.plugins.property2constant.Property2ConstantPlugin'
+            displayName = 'Property2Constant'
+            description = 'Turns .properties files into contant.java files'
+            tags.set(['properties', 'constants'])
         }
     }
 }
