@@ -1,4 +1,4 @@
-package com.krok.plugins.property2constant;
+package com.krokodon.plugins.property2constant;
 
 public class Property2ConstantExtension {
 
