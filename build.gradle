@@ -22,7 +22,7 @@ gradlePlugin {
             id = 'com.krok.property2constant'
             implementationClass = 'com.krok.plugins.property2constant.Property2ConstantPlugin'
             displayName = 'Property2Constant'
-            description = 'Turns .properties files into contant.java files'
+            description = 'Turns .properties files into constant.java files'
             tags.set(['properties', 'constants'])
         }
     }
