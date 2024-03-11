@@ -16,7 +16,7 @@ dependencies {
 }
 gradlePlugin {
     website = 'https://github.com/krokov'
-    vcsUrl = 'https://github.com/krokov/Property2ConstantPlugin'
+    vcsUrl = 'https://github.com/krokov/Property2ConstantPlugin_gradle'
     plugins {
         Property2Constant {
             id = 'com.krok.property2constant'
