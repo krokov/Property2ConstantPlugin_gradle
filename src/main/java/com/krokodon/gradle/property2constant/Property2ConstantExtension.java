@@ -1,4 +1,4 @@
-package com.krokodon.plugins.property2constant;
+package com.krokodon.gradle.property2constant;
 
 public class Property2ConstantExtension {
 

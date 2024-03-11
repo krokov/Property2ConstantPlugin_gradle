@@ -19,8 +19,8 @@ gradlePlugin {
     vcsUrl = 'https://github.com/krokov/Property2ConstantPlugin_gradle'
     plugins {
         Property2Constant {
-            id = 'com.krokodon.property2constant'
-            implementationClass = 'com.krokodon.plugins.property2constant.Property2ConstantPlugin'
+            id = 'com.krokodon.gradle.property2constant'
+            implementationClass = 'com.krokodon.gradle.property2constant.Property2ConstantPlugin'
             displayName = 'Property2Constant'
             description = 'Turns .properties files into constant.java files'
             tags.set(['properties', 'constants'])
