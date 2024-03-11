@@ -6,4 +6,4 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-rootProject.name = 'Propety2Constant'
+rootProject.name = 'property2constant'

@@ -1,5 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
+    //id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 group = 'com.krok'
@@ -11,14 +13,13 @@ repositories {
 
 dependencies {
     implementation gradleApi()
-    implementation 'com.krok:Property2ConstantPlugin:1.0'
 }
-
 gradlePlugin {
+    website = ''
     plugins {
-        Property2ConstantPlugin {
-            id = 'com.krok.Property2ConstantPlugin'
-            implementationClass = 'com.krok.Property2ConstantPlugin'
+        Property2Constant {
+            id = 'com.krok.property2constant'
+            implementationClass = 'com.krok.plugins.property2constant.Property2ConstantPlugin'
         }
     }
 }
