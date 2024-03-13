@@ -1,21 +1,18 @@
 package com.krokodon.gradle.property2constant;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
+import java.util.Arrays;
+import java.util.List;
 public class Property2ConstantExtension {
-
-    private String sourceDir = "src/main/resources";
-    private String outputDir = "gradle/build/generated/sources";
+    private List<String> sourceDir = Arrays.asList("src/main/resources");
+    private String outputDir = "build/generated/sources";
     private String packagePrefix = "com.user";
 
-    public String getSourceDir() {
+    public List<String> getSourceDir() {
         return sourceDir;
     }
 
-    public void setSourceDirs(String sourceDir) {
+    public void setSourceDir(List<String> sourceDir) {
         this.sourceDir = sourceDir;
     }
-
     public String getOutputDir() {
         return outputDir;
     }

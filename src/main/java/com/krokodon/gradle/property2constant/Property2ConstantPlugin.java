@@ -10,71 +10,76 @@ import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.util.List;
 import java.nio.charset.StandardCharsets;
+import org.gradle.api.Task;
+import org.gradle.api.tasks.TaskProvider;
+
+
 
 public class Property2ConstantPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
         project.getExtensions().create("Property2ConstantPlugin", Property2ConstantExtension.class);
-        //Auto
-        generateConstants(project);
-        //Manual
-        project.getTasks().register("generatePropertyConstants", task -> {
-            task.doLast(t -> generateConstants(project));
+
+        TaskProvider<Task> generateConstantsTask = project.getTasks().register("generatePropertyConstants", task -> {
+            task.doLast(t -> generateConstants(project)); // Specify the task action
         });
 
+        project.getTasks().named("build", task -> {
+            task.dependsOn(generateConstantsTask);
+        });
     }
+
 
     private void generateConstants(Project project) {
         Property2ConstantExtension extension = project.getExtensions().findByType(Property2ConstantExtension.class);
 
+        List <String> sourceDirs = extension.getSourceDir();
         String outputDir = extension.getOutputDir();
         String prefix = extension.getPackagePrefix();
-        String sourceDir = extension.getSourceDir();
+        for (String sourceDir : sourceDirs) {
 
-        FileTree propertyFiles = project.fileTree(sourceDir)
-                .matching(pattern -> pattern.include("**/*.properties"));
+            FileTree propertyFiles = project.fileTree(sourceDir)
+                    .matching(pattern -> pattern.include("**/*.properties"));
 
-        String currentDirectory = System.getProperty("user.dir");
-        project.getLogger().lifecycle("working dir: " + currentDirectory);
+            String currentDirectory = System.getProperty("user.dir");
 
-        propertyFiles.forEach(file -> {
-            try {
-                List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-                String className = file.getName().replaceAll("\\.properties", "") + "Constants";
-                className = className.substring(0, 1).toUpperCase() + className.substring(1);
+            propertyFiles.forEach(file -> {
+                try {
+                    List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+                    String className = file.getName().replaceAll("\\.properties", "") + "Constants";
+                    className = className.substring(0, 1).toUpperCase() + className.substring(1);
 
-                File outputDirectory = new File(currentDirectory + "/" + outputDir);
-                outputDirectory.mkdirs();
+                    File outputDirectory = new File(currentDirectory + "/" + outputDir);
+                    outputDirectory.mkdirs();
 
-                File packageDirectory = new File(outputDirectory, "/" + prefix);
-                packageDirectory.mkdirs();
+                    File packageDirectory = new File(outputDirectory, "/" + prefix);
+                    packageDirectory.mkdirs();
 
-                File constantsFile = new File(packageDirectory, className + ".java");
-                constantsFile.createNewFile();
+                    File constantsFile = new File(packageDirectory, className + ".java");
+                    constantsFile.createNewFile();
 
-                File oldConstantsFile = new File(packageDirectory, className + ".java");
-                if (oldConstantsFile.exists()) {
-                    oldConstantsFile.delete();
-                }
+                    File oldConstantsFile = new File(packageDirectory, className + ".java");
+                    if (oldConstantsFile.exists()) {
+                        oldConstantsFile.delete();
+                    }
 
-                String constantsContent = generateConstantsContent(lines, prefix, className);
-                try (FileOutputStream fos = new FileOutputStream(constantsFile);
-                     OutputStreamWriter osw = new OutputStreamWriter(fos)) {
-                    osw.write(constantsContent);
+                    String constantsContent = generateConstantsContent(lines, prefix, className);
+                    try (FileOutputStream fos = new FileOutputStream(constantsFile);
+                         OutputStreamWriter osw = new OutputStreamWriter(fos)) {
+                        osw.write(constantsContent);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    project.getLogger().lifecycle("Generated constants file: " + constantsFile.toPath());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    project.getLogger().error("Failed to generate constants file for: " + file.getAbsolutePath(), e);
                 }
-
-
-                project.getLogger().lifecycle("Generated constants file: " + constantsFile.toPath());
-            } catch (IOException e) {
-                project.getLogger().error("Failed to generate constants file for: " + file.getAbsolutePath(), e);
-            }
-        });
-            }
-
-
+            });
+        }
+    }
 
     private String generateConstantsContent(List<String> lines, String prefix, String className) {
         StringBuilder content = new StringBuilder();

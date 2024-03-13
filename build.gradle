@@ -1,15 +1,15 @@
 plugins {
     id 'java-gradle-plugin'
-    //id 'maven-publish'
-    id 'com.gradle.plugin-publish' version '1.2.1'
+    id 'maven-publish'
+    //id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 group = 'com.krokodon'
 version = '0.11'
 
-repositories {
-    mavenCentral()
-}
+//repositories {
+//    mavenCentral()
+//}
 
 dependencies {
     implementation gradleApi()
