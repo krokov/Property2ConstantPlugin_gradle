@@ -1,7 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'maven-publish'
-    //id 'com.gradle.plugin-publish' version '1.2.1'
+    //id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 group = 'com.krokodon'
@@ -22,7 +22,7 @@ gradlePlugin {
             id = 'com.krokodon.gradle.property2constant'
             implementationClass = 'com.krokodon.gradle.property2constant.Property2ConstantPlugin'
             displayName = 'Property2Constant'
-            description = 'Turns .properties files into constant.java files'
+            description = 'Turns .properties files into constant.java files.'
             tags.set(['properties', 'constants'])
         }
     }
