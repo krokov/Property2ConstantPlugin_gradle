@@ -5,11 +5,11 @@ plugins {
 }
 
 group = 'com.krokodon'
-version = '0.1'
+version = '0.11'
 
-//repositories {
-//    mavenCentral()
-//}
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation gradleApi()

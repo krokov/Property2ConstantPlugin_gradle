@@ -11,8 +11,6 @@ import java.nio.file.Files;
 import java.util.List;
 import java.nio.charset.StandardCharsets;
 
-
-
 public class Property2ConstantPlugin implements Plugin<Project> {
 
     @Override
@@ -30,9 +28,10 @@ public class Property2ConstantPlugin implements Plugin<Project> {
     private void generateConstants(Project project) {
         Property2ConstantExtension extension = project.getExtensions().findByType(Property2ConstantExtension.class);
 
-        String sourceDir = extension.getSourceDir();
         String outputDir = extension.getOutputDir();
         String prefix = extension.getPackagePrefix();
+        String sourceDir = extension.getSourceDir();
+
         FileTree propertyFiles = project.fileTree(sourceDir)
                 .matching(pattern -> pattern.include("**/*.properties"));
 
@@ -45,10 +44,10 @@ public class Property2ConstantPlugin implements Plugin<Project> {
                 String className = file.getName().replaceAll("\\.properties", "") + "Constants";
                 className = className.substring(0, 1).toUpperCase() + className.substring(1);
 
-                File outputDirectory = new File(currentDirectory+"/"+outputDir);
+                File outputDirectory = new File(currentDirectory + "/" + outputDir);
                 outputDirectory.mkdirs();
 
-                File packageDirectory = new File(outputDirectory, "/"+prefix);
+                File packageDirectory = new File(outputDirectory, "/" + prefix);
                 packageDirectory.mkdirs();
 
                 File constantsFile = new File(packageDirectory, className + ".java");
@@ -73,7 +72,9 @@ public class Property2ConstantPlugin implements Plugin<Project> {
                 project.getLogger().error("Failed to generate constants file for: " + file.getAbsolutePath(), e);
             }
         });
-    }
+            }
+
+
 
     private String generateConstantsContent(List<String> lines, String prefix, String className) {
         StringBuilder content = new StringBuilder();
