@@ -1,8 +1,6 @@
+
 package com.krokodon.gradle.property2constant;
 
-import org.gradle.api.Plugin;
-import org.gradle.api.Project;
-import org.gradle.api.file.FileTree;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,13 +10,16 @@ import java.util.List;
 import java.nio.charset.StandardCharsets;
 import org.gradle.api.Task;
 import org.gradle.api.tasks.TaskProvider;
+import org.gradle.api.Plugin;
+import org.gradle.api.Project;
+import org.gradle.api.file.FileTree;
 
 
 
 public class Property2ConstantPlugin implements Plugin<Project> {
 
     @Override
-    public void apply(Project project) {
+    public void apply(final Project project) {
         project.getExtensions().create("Property2ConstantPlugin", Property2ConstantExtension.class);
 
         TaskProvider<Task> generateConstantsTask = project.getTasks().register("generatePropertyConstants", task -> {
@@ -31,10 +32,10 @@ public class Property2ConstantPlugin implements Plugin<Project> {
     }
 
 
-    private void generateConstants(Project project) {
+    private void generateConstants(final Project project) {
         Property2ConstantExtension extension = project.getExtensions().findByType(Property2ConstantExtension.class);
 
-        List <String> sourceDirs = extension.getSourceDir();
+        List<String> sourceDirs = extension.getSourceDir();
         String outputDir = extension.getOutputDir();
         String prefix = extension.getPackagePrefix();
         for (String sourceDir : sourceDirs) {
@@ -81,7 +82,7 @@ public class Property2ConstantPlugin implements Plugin<Project> {
         }
     }
 
-    private String generateConstantsContent(List<String> lines, String prefix, String className) {
+    private String generateConstantsContent(final List<String> lines, final String prefix, final String className) {
         StringBuilder content = new StringBuilder();
         content.append("package ").append(prefix).append(";\n\n");
         content.append("public final class ").append(className).append(" {\n");
