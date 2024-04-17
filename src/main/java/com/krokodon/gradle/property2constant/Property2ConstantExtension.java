@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 public class Property2ConstantExtension {
     private List<String> sourceDir = Arrays.asList("src/main/resources");
-    private String outputDir = "build/generated/sources";
+    private String outputDir = "build/generated-sources";
     private String packagePrefix = "com.user";
 
     public List<String> getSourceDir() {
