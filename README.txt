@@ -13,7 +13,7 @@ plugins{
 
 Property2ConstantPlugin {
     sourceDir = ['src/main/resources'] //Plugin will look through everything in the directories to find all possible .properties files
-    outputDir = 'build/gen/sources' //Where to place constant files
+    outputDir = 'build/generated-sources' //Where to place constant files
     packagePrefix = 'com.example' //A package made in the outputDir that will actually contain the constant files, they refrence this as the package name
 }
 
