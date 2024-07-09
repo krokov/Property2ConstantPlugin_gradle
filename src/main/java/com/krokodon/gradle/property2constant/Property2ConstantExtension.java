@@ -9,7 +9,7 @@ public class Property2ConstantExtension {
     /**
      * Specified output directory.
      */
-    private String outputDir = "build/generated/sources";
+    private String outputDir = "build/generated-sources";
     /**
      * Package name that will be added to the output directory where the constant file will sit.
      */
